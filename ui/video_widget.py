@@ -159,13 +159,13 @@ class VideoWidget(QLabel):
         scale_x: float, scale_y: float,
     ) -> None:
         if not result.matches:
-            # No face overlay
-            painter.setPen(QColor(255, 200, 0))
-            painter.setFont(QFont("Consolas", 12))
+            # No face overlay — suggest positioning
+            painter.setPen(QColor(255, 180, 0))
+            painter.setFont(QFont("Consolas", 13, QFont.Weight.Bold))
             painter.drawText(
-                QRect(x_off, y_off + 10, 300, 30),
+                QRect(x_off + 10, y_off + 20, 400, 40),
                 Qt.AlignmentFlag.AlignLeft,
-                "⚠ No face detected",
+                "📷 Face not detected\nTurn toward camera or improve lighting",
             )
             return
 
@@ -184,7 +184,7 @@ class VideoWidget(QLabel):
             painter.drawText(
                 QRect(x_off, y_off + 40, 300, 25),
                 Qt.AlignmentFlag.AlignLeft,
-                "⚠ Possible static image",
+                "⚠ Move slowly for liveness check",
             )
 
     def _paint_registration_bbox(

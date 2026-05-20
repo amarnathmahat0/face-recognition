@@ -177,7 +177,10 @@ class MainWindow(QMainWindow):
         cfg = self._cfg
 
         self._repository = FileFaceRepository(cfg.storage.data_dir)
-        self._detector = HaarFaceDetector(min_size=(cfg.recognition.min_face_size,) * 2)
+        self._detector = HaarFaceDetector(
+            min_size=(cfg.recognition.min_face_size,) * 2,
+            use_profile=cfg.recognition.detector_use_profile,
+        )
         self._embedder = FaceRecognitionEmbedder(num_jitters=1, model="small")
         self._engine = CosineRecognitionEngine(cfg.recognition.similarity_threshold)
 
@@ -400,8 +403,11 @@ class MainWindow(QMainWindow):
                 self._registration_session, frame
             )
             bbox = result.bbox if result else None
+            multi_angle = self._cfg.recognition.registration_multi_angle
             self._register_panel.on_sample_result(
-                result, self._cfg.recognition.samples_per_identity
+                result,
+                self._cfg.recognition.samples_per_identity,
+                multi_angle_hint=multi_angle,
             )
             self._register_panel._progress_bar.setValue(
                 self._registration_session.accepted_count
@@ -608,6 +614,21 @@ class MainWindow(QMainWindow):
             }
             QPushButton:hover:!checked { background: #252545; }
         """
+
+    # ── Helper methods ────────────────────────────────────────────────────────
+
+    def _get_angle_guidance(self, accepted_count: int, total: int) -> str:
+        """Suggest angles for multi-angle registration."""
+        if accepted_count == 0:
+            return "📸 Look straight at camera"
+        elif accepted_count == 1:
+            return "📸 Look straight + Turn head left (slight)"
+        elif accepted_count == 2:
+            return "📸 Add: Turn head right (slight)"
+        elif accepted_count in (3, 4):
+            return "📸 Add: Slight tilt up/down"
+        else:
+            return f"📸 {accepted_count}/{total} done — any angle helps!"
 
     # ── Cleanup ───────────────────────────────────────────────────────────────
 

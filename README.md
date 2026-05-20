@@ -1,4 +1,4 @@
-# FaceID — Production-Grade Face Recognition Desktop App
+# Face Recognition Desktop App
 
 A real-time face registration and verification desktop application built with Python, PyQt6, and OpenCV. Engineered to production standards: strict layered architecture, bounded memory, zero-UI-blocking threading, exhaustive failure handling, and full unit-test coverage of business logic.
 
@@ -571,7 +571,6 @@ This is useful for:
 
 > What would need to change if this same application were deployed in a medical technology context — e.g., patient identification at a clinic, surgical suite access control, or ICU staff authentication?
 
-This section is an honest engineering assessment. Medical deployment raises the bar across every dimension.
 
 ---
 

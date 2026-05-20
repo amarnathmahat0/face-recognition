@@ -18,6 +18,8 @@ recognition:
   verify_frame_gap: 2
   liveness_threshold: 0.30
   liveness_window: 5
+  detector_use_profile: true
+  registration_multi_angle: true
 
 storage:
   data_dir: ./data/faces

@@ -164,7 +164,7 @@ class RegisterPanel(QWidget):
 
     # ── Sample feedback ────────────────────────────────────────────────────────
 
-    def on_sample_result(self, result: SampleResult, total: int) -> None:
+    def on_sample_result(self, result: SampleResult, total: int, multi_angle_hint: bool = False) -> None:
         if result.status == SampleStatus.REJECTED_FRAME_GAP:
             return  # Don't spam the log with every skipped frame
 

@@ -39,6 +39,7 @@ class _RecognitionConfig:
         "samples_per_identity", "sample_frame_gap",
         "max_samples_per_identity", "confidence_high", "confidence_medium",
         "verify_frame_gap", "liveness_threshold", "liveness_window",
+        "detector_use_profile", "registration_multi_angle",
     )
 
     def __init__(self, d: dict[str, Any]) -> None:
@@ -53,6 +54,8 @@ class _RecognitionConfig:
         self.verify_frame_gap: int = int(d.get("verify_frame_gap", 1))
         self.liveness_threshold: float = float(d.get("liveness_threshold", 0.30))
         self.liveness_window: int = int(d.get("liveness_window", 5))
+        self.detector_use_profile: bool = bool(d.get("detector_use_profile", True))
+        self.registration_multi_angle: bool = bool(d.get("registration_multi_angle", True))
 
 
 class _StorageConfig:
