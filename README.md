@@ -571,7 +571,6 @@ This is useful for:
 
 > What would need to change if this same application were deployed in a medical technology context — e.g., patient identification at a clinic, surgical suite access control, or ICU staff authentication?
 
-This section is an honest engineering assessment. Medical deployment raises the bar across every dimension.
 
 ---
 
